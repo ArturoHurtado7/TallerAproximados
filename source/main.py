@@ -1,3 +1,4 @@
+from vertex_cover import VertexCover
 from graph import Graph
 import sys
 
@@ -18,12 +19,34 @@ def main():
         print('Error: Faltan argumentos, por favor ingrese -i o --input y -o o --output')
         exit(1)
 
-    # Importa el archivo a procesar
-    input_file = open(input_path, "r") 
-    text = ''
-    if input_file:
-        text = input_file.read()
-    print(text.split('\n'))
+    # Crea el grafo
+    graph = Graph(input_path)
+    # Crea el objeto VertexCover
+    print('graph.solution_type', graph.solution_type)
+    cover = VertexCover(graph.edges, graph.nodes)
+    # Ejecuta el algoritmo de VertexCover con el tipo de solución especificado en el archivo de entrada
+    if graph.solution_type == 1:
+        vertices = cover.arbitrary_vertex_pick()
+    elif graph.solution_type == 2:
+        vertices = cover.high_degree_pick()
+    elif graph.solution_type == 3:
+        vertices = cover.arbitrary_vertex_degree()
+    elif graph.solution_type == 4:
+        print('random_vertex_pick')
+        vertices = cover.random_vertex_pick()
+
+    # Imprime el resultado en el archivo de salida
+    solution = graph.decode_nodes(vertices)
+    input_vertices = graph.decode_nodes(graph.nodes)
+    input_edges = graph.decode_edges(graph.edges)
+
+    print('solution type', graph.solution_type)
+    print('input edges', input_edges)
+    print('input vertices', input_vertices)
+    print('input vertices size', len(input_vertices))
+    print('output vertices', solution)
+    print('output vertices size', len(solution))
+
 
 if __name__ == "__main__":
     main()
