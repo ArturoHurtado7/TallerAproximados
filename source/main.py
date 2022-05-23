@@ -32,7 +32,6 @@ def main():
     elif graph.solution_type == 3:
         vertices = cover.arbitrary_vertex_degree()
     elif graph.solution_type == 4:
-        print('random_vertex_pick')
         vertices = cover.random_vertex_pick()
 
     # Imprime el resultado en el archivo de salida

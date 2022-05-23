@@ -24,7 +24,7 @@ class VertexCover:
         while prime_edges:
             edge = prime_edges.pop()
             vertices.append(edge[0]), vertices.append(edge[1])
-            prime_edges = [e for e in prime_edges if e[0] not in vertices and e[1] not in vertices]
+            prime_edges = [e for e in prime_edges if e[0] != edge[0] and e[1] != edge[0] and e[0] != edge[1] and e[1] != edge[1]]
         vertices.sort()
         return vertices
 
@@ -41,7 +41,7 @@ class VertexCover:
         while prime_edges:
             vertex = self.higher_degree_vertex(prime_edges)
             vertices.append(vertex)
-            prime_edges = [e for e in prime_edges if e[0] not in vertices and e[1] not in vertices]
+            prime_edges = [e for e in prime_edges if e[0] != vertex and e[1] != vertex]
         vertices.sort()
         return vertices
 
@@ -59,7 +59,7 @@ class VertexCover:
             edge = prime_edges.pop()
             vertex = self.higher_degree_from_edge(prime_edges, edge)
             vertices.append(vertex)
-            prime_edges = [e for e in prime_edges if e[0] not in vertices and e[1] not in vertices]
+            prime_edges = [e for e in prime_edges if e[0] != vertex and e[1] != vertex]
         vertices.sort()
         return vertices
 
