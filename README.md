@@ -2,7 +2,7 @@
 
 ejecución del algoritmo de [TallerAproximados]
 
-python .\source\main.py -i .\data\input_100.csv
+python .\source\main.py -i .\data\input_100.csv -a 1
 
 Instrucciones
 Implementar en los grupos de trabajo un programa que resuelva el problema de cubrimiento de vértices implementando los siguientes 4 algoritmos:

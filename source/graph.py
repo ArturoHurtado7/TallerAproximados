@@ -11,7 +11,6 @@ class Graph:
             input_file = open(input_path, "r") 
             text = input_file.read()
             rows = text.split('\n')
-            self.solution_type = int(rows.pop(0))
             self.old_edges, self.old_nodes = self.original_graph(rows)
             self.edges = self.coded_graph(self.old_edges, self.old_nodes)
             self.nodes = [i for i in range(len(self.old_nodes))]
