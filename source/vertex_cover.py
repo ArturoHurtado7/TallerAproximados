@@ -78,7 +78,6 @@ class VertexCover:
             vertex = edge[randint(0, 1)]
             vertices.append(vertex)
             prime_edges = [e for e in prime_edges if e[0] != vertex and e[1] != vertex]
-            print(len(prime_edges))
         vertices.sort()
         return vertices
 

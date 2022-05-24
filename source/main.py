@@ -1,29 +1,30 @@
 from vertex_cover import VertexCover
 from graph import Graph
-import sys
+import sys, time
 
 def main():
     args = sys.argv[1:]
-    input_path = output_path = ''
+    input_path = ''
 
     for i in range(0, len(args), 2):
         if args[i] == '-i' or args[i] == '--input':
-            input_path = args[i + 1]
-        elif args[i] == '-o' or args[i] == '--output':
-            output_path = args[i + 1]
+            input_path = args[i+1]
         else:
             print(f'Error: Argumento "{args[i]}" inválido')
             exit(1)
-    
-    if input_path == '' or output_path == '':
-        print('Error: Faltan argumentos, por favor ingrese -i o --input y -o o --output')
+
+    if not input_path:
+        print('Error: Faltan argumentos, por favor ingrese -i o --input')
         exit(1)
 
     # Crea el grafo
     graph = Graph(input_path)
+    print('solution type', graph.solution_type)
+
     # Crea el objeto VertexCover
-    print('graph.solution_type', graph.solution_type)
     cover = VertexCover(graph.edges, graph.nodes)
+    start = time.time()
+
     # Ejecuta el algoritmo de VertexCover con el tipo de solución especificado en el archivo de entrada
     if graph.solution_type == 1:
         vertices = cover.arbitrary_vertex_pick()
@@ -35,16 +36,11 @@ def main():
         vertices = cover.random_vertex_pick()
 
     # Imprime el resultado en el archivo de salida
+    end = time.time()
     solution = graph.decode_nodes(vertices)
-    input_vertices = graph.decode_nodes(graph.nodes)
-    input_edges = graph.decode_edges(graph.edges)
-
-    print('solution type', graph.solution_type)
-    print('input edges', input_edges)
-    print('input vertices', input_vertices)
-    print('input vertices size', len(input_vertices))
     print('output vertices', solution)
     print('output vertices size', len(solution))
+    print(f'time elapsed: {end - start} seconds')
 
 
 if __name__ == "__main__":
